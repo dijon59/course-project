@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import classes from './App.module.css';
-import Person from './Person/Person';
-import ErrorBoundary from "./ErrorBoundary/ErrorBoundary";
+import Person from './Components/Persons/Person/Person';
+import ErrorBoundary from "./Components/ErrorBoundary/ErrorBoundary";
 
 // import Radium, { StyleRoot } from "radium";
 // import styled from 'styled-components'
