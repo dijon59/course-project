@@ -4,6 +4,10 @@ import Persons from "../Components/Persons/Persons";
 import Cockpit from "../Components/Cockpit/Cockpit";
 
 class App extends Component {
+    constructor(props) {
+        super(props);
+        console.log('[App.js] constructor')
+    }
     state = {
         persons: [
             { id: 'asfa1', name: 'Max', age: 28},
@@ -13,6 +17,24 @@ class App extends Component {
         otherState: 'Some other value',
         showPersons: false,
     };
+
+    static getDerivedStateFromProps(props, state) {
+        console.log('[App.js] getDerivedStateFromProps', props);
+        return state
+    }
+
+    componentDidMount() {
+        console.log('[App.js] componentDidMount');
+    }
+
+    shouldComponentUpdate(nextProps, nextState, nextContext) {
+        console.log('[App.js] shouldComponentUpdate' )
+        return true;
+    }
+
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        console.log('[App.js] componentDidUpdate')
+    }
 
     nameChangedHandler = ( event, id ) => {
         const personIndex = this.state.persons.findIndex(p => {
@@ -31,9 +53,9 @@ class App extends Component {
     togglePersonsHandler = () => {
         const doesShow = this.state.showPersons;
         this.setState({showPersons: !doesShow})
-
-
     };
+
+
     deletePersonHandler = ( personIndex ) => {
         // const persons = this.state.persons.slice();
         // spread operator
@@ -44,6 +66,7 @@ class App extends Component {
 
 
     render() {
+        console.log('[App.js] render')
         let persons = null;
 
 
@@ -70,41 +93,3 @@ class App extends Component {
 
 
 export default App;
-
-
-
-
-// hooks
-// const App = props => {
-//     // Array distructuring
-//     const [personState, setPersonState] = useState({
-//     persons: [
-//       {name: 'Max', age: 28},
-//       {name: 'Manu', age: 29},
-//       {name: 'Stephanie', age: 26}
-//     ],
-//     otherState: 'some other value'
-//   });
-//
-//     const [otherState, setOtherState] = useState('some other value');
-//     console.log(personState, otherState);
-//     const switchNameHandler = () => {
-//         setPersonState({
-//           persons: [
-//               {name: 'Dijon', age: 24},
-//               {name: 'Manu', age: 29},
-//               {name: 'Stephanie', age: 26}
-//           ]
-//       })
-//     };
-//       // jsx not html
-//     return (
-//         <div className='App'>
-//         <h1>Hi, Hello world</h1>
-//         <button onClick={switchNameHandler}>Switch Name</button>
-//         <Person name={personState.persons[0].name} age={personState.persons[0].age}> My person </Person>
-//         <Person name={personState.persons[1].name} age={personState.persons[1].age}></Person>
-//         <Person name={personState.persons[2].name} age={personState.persons[2].age}></Person>
-//         </div>
-//     )
-// };
